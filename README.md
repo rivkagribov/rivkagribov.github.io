@@ -29,7 +29,7 @@ Usage
     Open the index.html file in your web browser to start playing the game.
     Use the grid to input guesses and view the results.
     The scorecard on the left tracks your performance.
-
+    
 ## Responsive Design
 
 The game is designed to be responsive and should work well on various devices:
