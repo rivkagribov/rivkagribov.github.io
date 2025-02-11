@@ -74,27 +74,24 @@ h1 {
     margin: 0px;
     margin-left: 20px;
 }
-.scorecard {
+.keyboard {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    height: 350px;
-    width: 280px;
-    background-color: green;
-    color: white;
-    border-radius: 10px;
-    border: 3px solid white;
-    margin-right: 20px;
-    margin-left: 20px;
+    flex-wrap: wrap;
+    margin-top: 20px;
 }
-.scorecard h1{
-    justify-self: flex-start;
-}
-.scorecard h2 {
-    display: inline-block;
+
+.key {
+    background-color: lightgrey;
+    color: black;
+    border: 1px solid darkgrey;
+    padding: 10px;
     margin: 5px;
-    text-align: center;
+    cursor: pointer;
+}
+
+.key.tried {
+    background-color: grey;
 }
 #count{
     display: inline-block;
