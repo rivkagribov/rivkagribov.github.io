@@ -113,19 +113,11 @@ h1 {
         width: 80px;
         height: 80px;
     }
-    .scorecard {
-        height: 300px;
-        width: 180px;
-    }
 }
 @media (max-width: 940px) {
     .box {
         width: 70px;
         height: 70px;
-    }
-    .scorecard {
-        height: 270px;
-        width: 160px;
     }
 }
 @media (max-width: 780px) {
@@ -133,22 +125,11 @@ h1 {
         width: 60px;
         height: 60px;
     }
-    .scorecard {
-        height: 240px;
-        width: 140px;
-    }
-    .scorecard h1{
-        font-size: 1.5rem;
-    }
 }
 @media (max-width: 700px) {
     .box {
         width: 50px;
         height: 50px;
-    }
-    .scorecard {
-        height: 210px;
-        width: 150px;
     }
 }
 @media (max-width: 640px) {
@@ -162,11 +143,6 @@ h1 {
         flex: 0 0 auto;
         width: 150px;
         margin-right: 10px;
-    }
-    .scorecard {
-        height: 180px;
-        width: 130px;
-        border: 2px solid white;
     }
     .innerContainer {
         display: grid;
@@ -189,11 +165,6 @@ h1 {
     }
     .article {
         width: 120px;
-    }
-    .scorecard {
-        height: 120px;
-        width: 80px;
-        border: 1px solid white;
     }
     .innerContainer {
         width: calc(100% - 130px);
