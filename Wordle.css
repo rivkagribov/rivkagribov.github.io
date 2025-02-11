@@ -12,13 +12,14 @@ body, html {
 }
 .innerContainer {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 5px;
     max-width: fit-content;
 }
 .box {
     width: 100px;
     height: 100px;
+    aspect-ratio: 1 / 1;
     background-color: rgb(0, 0, 0);
     display: flex;
     align-items: center;
@@ -28,6 +29,15 @@ body, html {
     font-weight: bold;
     border: 3px solid white;
     color: white;
+}
+.box.animated {
+    animation: flipAnimation 0.5s ease-in-out;
+}
+
+@keyframes flipAnimation {
+    0% { transform: rotateX(0deg); }
+    50% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0deg); }
 }
 .navbar {
     background-color: black;
@@ -75,21 +85,45 @@ h1 {
     margin-left: 20px;
 }
 .keyboard {
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
+    display: flex; 
+    flex-direction: column;
+    align-items: center;
     margin-top: 20px;
 }
-
-.key {
-    background-color: lightgrey;
-    color: black;
-    border: 1px solid darkgrey;
-    padding: 10px;
-    margin: 5px;
-    cursor: pointer;
+.keyboard-row {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+    margin-bottom: 5px;
 }
-
+.key {
+    height: 50px;
+    background-color: grey;
+    color: white;
+    border: none;
+    font-size: 18px;
+    text-align: center;
+    padding: 10px;
+    margin: 3px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.keyboard-row:first-child .key {
+    width: 42px;
+}
+.keyboard-row:nth-child(2) {
+    margin-left: 20px;
+}
+.keyboard-row:nth-child(3) {
+    margin-left: 40px;
+}
+.key.special {
+    width: 65px; /* Bigger size for Enter and Backspace */
+}
 .key.tried {
     background-color: grey;
 }
