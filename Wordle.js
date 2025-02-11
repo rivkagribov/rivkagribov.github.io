@@ -70,7 +70,7 @@ function resetGame(){
 
 async function Game(){
     await WordGenerator();
-    while(row<=5){
+    while(row<=6){
         answer=prompt("Enter the word:");
         if(answer.length!==5){
             alert("Please enter exactly 5 letters!");
@@ -86,7 +86,7 @@ async function Game(){
     row++;
     await new Promise(resolve=>setTimeout(resolve,1000));
 }
-if(row>5){
+if(row>6){
     alert("Loserrrr! The word was: "+word);resetGame();
     }
 }
