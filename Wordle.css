@@ -1,7 +1,6 @@
 body, html {
     height: 100%;
     margin: 0;
-    margin-top: 5px;
     background: linear-gradient(to right, rgb(50, 50, 50), rgb(80,80, 180),rgb(105, 105, 105));
 }
 .container {
@@ -48,7 +47,7 @@ body, html {
     color: white;
     border: 0px;
     font-size: 1.5rem;
-    background: linear-gradient(to right, rgb(110, 0, 110), rgb(180, 0, 180), rgb(255, 0, 255));
+    background: linear-gradient(to right, rgb(50, 50, 50), rgb(80,80, 180),rgb(105, 105, 105));
     -webkit-background-clip: initial;
     -webkit-text-fill-color: initial;
 }
