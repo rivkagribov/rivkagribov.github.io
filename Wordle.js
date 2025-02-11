@@ -110,7 +110,7 @@ async function main(){
         resetGame();
     });
     settingsButton.addEventListener('click', function() {
-        alert('How To Play. \nGuess the Wordle in 5 tries. \nEach guess must be a valid 5-letter word. n\ The color of the tiles will change to show how close your guess was to the word. \nRules: \n1. Guess the five letter word using the keyboard on the screen. \n2. Tell Rivka I love you and give her a kiss. \n3. You have 5 attempts. \nGood Luck!');
+        alert('How To Play. \n1. Guess the Wordle in 5 tries. \n2. Each guess must be a valid 5-letter word. \nThe color of the tiles will change to show how close your guess was to the word. \n3. Tell Rivka "I love you" and give her a kiss. \nGood Luck!');
     });
     newButtons.forEach(button => {
     button.addEventListener('click', function() {
