@@ -93,17 +93,30 @@ if(row>5){
 async function main(){
     let startButton=document.getElementById("startButton");
     let resetButton=document.getElementById("resetButton");
-    let newButton = document.querySelectorAll('.key');  // Add the new button
-    startButton.addEventListener('click',async()=>{
+    let settingsButton=document.getElementById('settingsButton');
+    let heartButton=document.getElementById('heartButton');
+    
+    let newButtons = document.querySelectorAll('.key')  // ".forEach(button => {" added . Add the new button
+    
+    startButton.addEventListener('click',async()=>{   
         await Game();
     });
-    resetButton.addEventListener('click',()=>{resetGame();
+    resetButton.addEventListener('click',()=>{
+        resetGame();
     });
-    newButton.addEventListener('click', function() {
+    settingsButton.addEventListener('click', function() {
+        alert('Rules: \n1. Guess the word by clicking the letters. \n2. Each letter can only be tried once. \n3. You have 5 attempts.');
+    });
+    newButtons.forEach(button => {
+    button.addEventListener('click', function() {
         button.classList.add('tried');
+            // Add your guess logic here
+          });
+    });
+    heartButton.addEventListener('click', function() {
+        alert('More');
         // Add your guess logic here
-    });  // Add event listener for the new button
-    
+    });  
 }
 
 main();
