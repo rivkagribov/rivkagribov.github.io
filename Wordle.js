@@ -96,8 +96,12 @@ async function main(){
     let resetButton=document.getElementById("resetButton");
     let settingsButton=document.getElementById('settingsButton');
     let heartButton=document.getElementById('heartButton');
-    
-    let newButtons = document.querySelectorAll('.key')  // ".forEach(button => {" added . Add the new button
+    let newButtons=document.querySelectorAll('.key')  // ".forEach(button => {" added . Add the new button
+
+    //resize the Image
+    let gameImage = document.getElementById("gameImage");
+    gameImage.style.width = "100px";  // Set the desired width
+    gameImage.style.height = "auto";  // Maintain aspect ratio
     
     startButton.addEventListener('click',async()=>{   
         await Game();
@@ -106,7 +110,7 @@ async function main(){
         resetGame();
     });
     settingsButton.addEventListener('click', function() {
-        alert('Rules: \n1. Guess the word by clicking the letters. \n2. Each letter can only be tried once. \n3. You have 5 attempts.');
+        alert('How To Play. \nGuess the Wordle in 5 tries. \nEach guess must be a valid 5-letter word. n\ The color of the tiles will change to show how close your guess was to the word. \nRules: \n1. Guess the five letter word using the keyboard on the screen. \n2. Tell Rivka I love you and give her a kiss. \n3. You have 5 attempts. \nGood Luck!');
     });
     newButtons.forEach(button => {
     button.addEventListener('click', function() {
