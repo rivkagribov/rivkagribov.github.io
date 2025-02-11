@@ -1,32 +1,41 @@
 <!DOCTYPE html>
+<!-- document type and version of HTML. It tells the web browser that this is an HTML5 document. -->
 <html lang="en">
+<!-- tag is the root element of the HTML document. The lang attribute specifies the language of the document (in this case, English). -->
 <head>
-    <meta charset="UTF-8">
+    <!-- contains meta-information about the document, such as the character set, document title, and links to stylesheets and scripts. -->  
+    <meta charset="UTF-8"> 
+    <!-- specifies the character encoding for the document, ensuring that the text is displayed correctly. -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- confirm compatibility with IE (internet exployer) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wordle.com</title>
+     <!-- ensures page is viewed correctly on all devices. -->
+    <title>JustinsWordle.com</title>
+     <!-- title of the web page that appears in the browser tab -->
     <link rel="stylesheet" href="Wordle.css">
+     <!-- Link to the external CSS file that contains styles for the web page. -->
     <link rel="icon" href="favicon.ico" type="image/x-icon">
+     <!-- link to the icon that appears in the browser tab next to the page title. Change this to a monkey? -->
 </head>
+     <!-- end of header -->
 <body>
+    <!-- add the option to select from the keyboard to guess and no prompt shown. each alphabet letter should grey out when tried.  -->
+   <!-- add space from the top -->
+    <!--change color from purple to dark grey -->
+    <!--get rid of attempts tracker -->
+    <!--add settings button that opens a prompt explaining the rules -->
+    <!--add heart button that when pressed says "more" -->
     <nav>
         <div class="navbar">
             <img src="pngwing.com(1).png" alt="" >
             <h1 >Wordle.com</h1>
     </nav>
         <div class="start">
-            <button id="startButton">Start</button>
+            <button id="startButton">Start Here!</button>
+            <!--button element with the ID startButton is used to create a clickable button labeled "Start" -->
             <button id="resetButton" type="reset">Reset</button>
         </div>
-    </div>
-    <div class="container">
-        <article class="article">
-            <div class="scorecard">
-                <h1 id="count">attempts</h1>
-                <div class="tries"><h2>1/5</h2></div>
-            </div>
-        </article>
-        <div class="innerContainer">
+    <div class="innerContainer">
             <button class="box"> </button>
             <button class="box"> </button>
             <button class="box"> </button>
@@ -53,7 +62,6 @@
             <button class="box"> </button>
             <button class="box"> </button>
         </div>
-    </div>
-    <script src="Wordle.js"></script>
+       <script src="Wordle.js"></script>
 </body>
 </html>
