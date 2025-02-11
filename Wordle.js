@@ -36,7 +36,8 @@ function Checker(){
     for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
         if(arrayCollection[i].style.backgroundColor!=="green"){
             if(word.includes(answer.charAt(count))&&usedLetters[answer.charAt(count)]<word.split(answer.charAt(count)).length-1){
-                arrayCollection[i].style.backgroundColor="yellow";usedLetters[answer.charAt(count)]++;
+                arrayCollection[i].style.backgroundColor="rgb(180, 180, 110)";
+                usedLetters[answer.charAt(count)]++;
             }
             else{
                 arrayCollection[i].style.backgroundColor="rgb(75,75,75)";
