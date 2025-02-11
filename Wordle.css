@@ -12,7 +12,8 @@ body, html {
 }
 .innerContainer {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: repeat(6, auto);
     gap: 5px;
     max-width: fit-content;
 }
