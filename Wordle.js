@@ -100,7 +100,7 @@ async function main(){
 
     //resize the Image
     let gameImage = document.getElementById("gameImage");
-    gameImage.style.width = "70px";  // Set the desired width
+    gameImage.style.width = "55px";  // Set the desired width
     gameImage.style.height = "auto";  // Maintain aspect ratio
     
     startButton.addEventListener('click',async()=>{   
