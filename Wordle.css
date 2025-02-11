@@ -45,12 +45,12 @@ body, html {
     right:20px;
 }
 .start button{
-    background-color: transparent;
+    color: white;
     border: 0px;
     font-size: 1.5rem;
     background: linear-gradient(to right, rgb(110, 0, 110), rgb(180, 0, 180), rgb(255, 0, 255));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: initial;
+    -webkit-text-fill-color: initial;
 }
 .start button:hover{
     cursor: pointer;
@@ -96,12 +96,6 @@ h1 {
 }
 #count{
     display: inline-block;
-}
-.tries{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 5px;
 }
 .flip {
     transform: rotateY(180deg);
