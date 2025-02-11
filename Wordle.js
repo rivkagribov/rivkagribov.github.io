@@ -59,17 +59,12 @@ async function InsertCharacter(answer,row){
     }
 }
 
-function updateTriesText(){
-    document.querySelector('.tries').textContent=`${row}/5`;
-}
-
 function resetGame(){
     arrayCollection.forEach(box=>{box.textContent="";
     box.style.backgroundColor="rgb(0, 0, 0)";});
     word="";
     row=1;
     answer="";
-    updateTriesText();
 }
 
 async function Game(){
@@ -82,9 +77,8 @@ async function Game(){
         }
         await InsertCharacter(answer,row);
         Checker();
-        updateTriesText();
         if(word===answer){
-            setTimeout(()=>{alert("Congratulations, you win!");
+            setTimeout(()=>{alert("Congratulations, you did it handsome!");
         },500);
         break;
     }
@@ -92,18 +86,24 @@ async function Game(){
     await new Promise(resolve=>setTimeout(resolve,1000));
 }
 if(row>5){
-    alert("Game over! The word was: "+word);resetGame();
+    alert("Loserrrr! The word was: "+word);resetGame();
     }
 }
 
 async function main(){
     let startButton=document.getElementById("startButton");
     let resetButton=document.getElementById("resetButton");
+    let newButton = document.querySelectorAll('.key');  // Add the new button
     startButton.addEventListener('click',async()=>{
         await Game();
     });
     resetButton.addEventListener('click',()=>{resetGame();
     });
+    newButton.addEventListener('click', function() {
+        button.classList.add('tried');
+        // Add your guess logic here
+    });  // Add event listener for the new button
+    
 }
 
 main();
