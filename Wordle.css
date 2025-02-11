@@ -47,7 +47,7 @@ body, html {
     color: white;
     border: 0px;
     font-size: 1.5rem;
-    background: linear-gradient(to right, rgb(50, 50, 50), rgb(105, 105, 105), rgb(50,50,50));
+    background-color: black;
     -webkit-background-clip: initial;
     -webkit-text-fill-color: initial;
 }
