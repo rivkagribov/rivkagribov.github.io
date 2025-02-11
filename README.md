@@ -1,12 +1,12 @@
-# Wordle
+# Justins Wordle for the google.sites accessible game
 
-A web-based Wordle game implementation where players guess words and track their progress through a scorecard. The game features a responsive grid layout and a scorecard displayed alongside the grid.
+A web-based Wordle game implementation where he can guess predetermined words related to us. The game features a responsive grid layout and a keyboard below the grid.
 
 ## Features
 
 - **Responsive Design**: The grid and scorecard adapt to various screen sizes.
-- **Grid Layout**: 5x5 grid with adjustable box sizes for different screen resolutions.
-- **Scorecard**: Positioned on the left of the grid, with adjustable dimensions.
+- **Grid Layout**: 6x5 grid with adjustable box sizes for different screen resolutions.
+- **Keyboard**: Positioned on the left of the grid, with adjustable dimensions.
 - **User Interface**: Clean and modern design with a gradient background and centered elements.
 
 ## Technologies Used
@@ -21,7 +21,7 @@ To get a local copy up and running follow these simple steps:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/Jinang12/wordle-project.git
+   git clone https://github.com/rivkagribov/wordle-project.git
 cd wordle-project
 Open index.html in your browser.
 Usage
