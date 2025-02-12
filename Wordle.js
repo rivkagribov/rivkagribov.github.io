@@ -1,4 +1,4 @@
-const wordList = ["SILLY","HEART", "CUPID", "ROSES", "STINKY", "SWEET", "DUCKS", "QUACK", "LATKE", "AMOUR", "LUCKY", "FLIRT", "FRUIT"]
+const wordList = ["SILLY","HEART", "CUPID", "ROSES", "STINK", "SWEET", "DUCKS", "QUACK", "LATKE", "AMOUR", "LUCKY", "FLIRT", "FRUIT"]
 
 let word = "", row = 1, answer = "", gameOver = false;
 let collection = document.getElementsByClassName("box");
