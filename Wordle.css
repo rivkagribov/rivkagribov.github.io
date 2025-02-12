@@ -48,24 +48,6 @@ body, html {
     align-items: center;
     justify-content:center;
 }
-.start{
-    margin-right:10px;
-    position: absolute;
-    top: 22px;
-    right:20px;
-}
-.start button{
-    color: white;
-    border: 0px;
-    font-size: 1.5rem;
-    background-color: black;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-}
-.start button:hover{
-    cursor: pointer;
-    opacity: 0.9;
-}
 h1 {
     margin: 0px;
     font-size: 2rem;
@@ -183,9 +165,6 @@ h1 {
         height: 40px;
         border: 2px solid white;
     }
-    #startButton,#resetButton{
-        font-size: 1rem;
-    }
 }
 @media (max-width: 480px) {
     .container {
@@ -215,12 +194,6 @@ h1 {
         top: 5px;
         right: -10px;
         margin-right: 2px;
-    }
-    #startButton{
-        font-size: 0.8rem;
-        position: absolute;
-        top: 5px;
-        right: 35px;
     }
     .navbar img{
         width: 28px;
