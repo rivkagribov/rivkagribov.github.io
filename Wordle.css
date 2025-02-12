@@ -1,7 +1,7 @@
 body, html {
     height: 100%;
     margin: 0;
-    background: linear-gradient(to right, rgb(50, 50, 50), rgb(105, 105, 105), rgb(50,50,50));
+    background: rgb(50,50,50);
 }
 .container {
     display: flex;
@@ -34,7 +34,7 @@ body, html {
     font-size: 20px;
     border-radius: 10px;
     font-weight: bold;
-    border: 3px solid white;
+    border: 3px  light grey;
     color: white;
 }
 .box.animated {
@@ -116,7 +116,7 @@ h1 {
     width: 65px; /* Bigger size for Enter and Backspace */
 }
 .key.tried {
-    background-color: grey;
+    background-color: dark grey;
 }
 #count{
     display: inline-block;
@@ -171,7 +171,7 @@ h1 {
     .box {
         width: 40px;
         height: 40px;
-        border: 2px solid white;
+        border: 2px light grey;
     }
 }
 @media (max-width: 480px) {
@@ -187,7 +187,7 @@ h1 {
     .box {
         width: 30px;
         height: 30px;
-        border: 1px solid white;
+        border: 1px light grey;
         border-radius: 5px;
     }
     .scorecard h1{
