@@ -1,39 +1,26 @@
 <!DOCTYPE html>
-<!-- document type and version of HTML. It tells the web browser that this is an HTML5 document. -->
 <html lang="en">
-<!-- tag is the root element of the HTML document. The lang attribute specifies the language of the document (in this case, English). -->
 <head>
-    <!-- contains meta-information about the document, such as the character set, document title, and links to stylesheets and scripts. -->  
     <meta charset="UTF-8"> 
-    <!-- specifies the character encoding for the document, ensuring that the text is displayed correctly. -->
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <!-- confirm compatibility with IE (internet exployer) -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <!-- ensures page is viewed correctly on all devices. -->
     <title>JustinsWordle.com</title>
-     <!-- title of the web page that appears in the browser tab -->
     <link rel="stylesheet" href="Wordle.css">
-     <!-- Link to the external CSS file that contains styles for the web page. -->
 </head>
 <body>
-    <!-- add the option to select from the keyboard to guess and no prompt shown. each alphabet letter should grey out when tried.  -->
-   <!-- add space from the top -->
     <nav>
-        <div class="navbar">
+    <div class="navbar">
             <img id="gameImage" src="IMG_0709.jpg" alt="Game Image" >
-            <h1 >Wordle.com</h1>
-        </div>
+            <h1 >JustinsWordle.com</h1>
     </nav>
         <div class="start">
-            <!--button element with the ID startButton is used to create a clickable button labeled "Start" -->
             <button id="resetButton">Reset</button>
             <button id="settingsButton">Settings</button>
             <button id="heartButton">❤️</button>
              <!--heart button id -->
         </div>
-    
+    </div>
     <div class="innerContainer">
-            <!-- 30 button elements for the game grid -->
             <button class="box"> </button>
             <button class="box"> </button>
             <button class="box"> </button>
