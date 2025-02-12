@@ -1,4 +1,5 @@
-let url = "https://random-word-api.vercel.app/api?words=1&length=5";
+const wordList = ["SILLY","HEART", "CUPID", "ROSES", "STINKY", "SWEET", "DUCKS", "QUACK", "LATKE", "AMOUR", "LUCKY", "FLIRT", "FRUIT"]
+
 let word = "", row = 1, answer = "", gameOver = false;
 let collection = document.getElementsByClassName("box");
 let arrayCollection = Array.from(collection);
@@ -6,20 +7,9 @@ let keyboardKeys = document.querySelectorAll(".key");
 let currentGuess = "";
 let maxLetters = 5;
 
-async function WordGenerator() {
-    try {
-        let response = await fetch(url);
-        if (!response.ok) throw new Error("Failed to fetch word");
-
-        const data = await response.json();
-        if (!data || !data[0]) throw new Error("Invalid word received");
-
-        word = data[0].toUpperCase();
-        console.log("Word generated:", word);
-    } catch (error) {
-        console.error("Error fetching word:", error);
-        alert("There was an error fetching the word. Try again!");
-    }
+function WordGenerator() {
+    word = wordList[Math.floor(Math.random() * wordList.length)].toUpperCase();
+    console.log("Word generated:", word);
 }
 
 function Checker() {
