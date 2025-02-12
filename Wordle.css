@@ -19,6 +19,7 @@ body, html {
     grid-template-rows: repeat(6, auto);
     gap: 5px;
     max-width: fit-content;
+    align-items: center;
 }
 .box {
     width: 100px;
