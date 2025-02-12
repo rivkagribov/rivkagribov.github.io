@@ -4,7 +4,7 @@ let collection = document.getElementsByClassName("box");
 let arrayCollection = Array.from(collection);
 let keyboardKeys = document.querySelectorAll(".key");
 let currentGuess = "";
-let maxLetters = 5; // Fixed capitalization
+let maxLetters = 5; 
 
 async function WordGenerator() {
     try {
@@ -16,7 +16,7 @@ async function WordGenerator() {
         if (!data || !data[0]) {
             throw new Error("Invalid word received");
         }
-        word = data[0].toUpperCase(); // Convert to uppercase for consistency
+        word = data[0].toUpperCase(); 
         console.log("Word generated:", word);
     } catch (error) {
         console.error("Error fetching word:", error);
@@ -50,7 +50,7 @@ async function Game() {
             alert("Please enter exactly 5 letters!");
             continue;
         }
-        answer = currentGuess; // Fix: Store the typed guess
+        answer = currentGuess; 
         await InsertCharacter(answer, row);
         Checker();
         if (word === answer) {
@@ -62,13 +62,12 @@ async function Game() {
         updateDisplay();
     }
     if (row > 6) {
-        alert("Loserrrr! The word was: " + word);
+        alert("Looooseeeeer! The word was: " + word);
         resetGame();
     }
 }
 
 async function main() {
-    let startButton = document.getElementById("startButton");
     let resetButton = document.getElementById("resetButton");
     let settingsButton = document.getElementById('settingsButton');
     let heartButton = document.getElementById('heartButton');
@@ -76,14 +75,9 @@ async function main() {
     let backspaceButton = document.getElementById("backspace");
     let enterButton = document.getElementById("enter");
 
-    // Resize game image
     let gameImage = document.getElementById("gameImage");
     gameImage.style.width = "55px";  
     gameImage.style.height = "auto";  
-
-    startButton.addEventListener('click', async () => {   
-        await Game();
-    });
 
     resetButton.addEventListener('click', () => {
         resetGame();
@@ -113,7 +107,20 @@ async function main() {
         currentGuess = currentGuess.slice(0, -1);
         updateDisplay();
     });
-
+// Handle enter key press
+document.addEventListener("keydown", async function(event) {
+    if (event.key === "Enter") {
+        if (currentGuess.length === maxLetters) {
+            answer = currentGuess;
+            await InsertCharacter(answer, row);
+            Checker();
+            currentGuess = "";
+            updateDisplay();
+        } else {
+            alert("Word must be 5 letters!");
+        }
+    }
+    
     // Handle enter key
     enterButton.addEventListener("click", async function() {
         if (currentGuess.length === maxLetters) {
