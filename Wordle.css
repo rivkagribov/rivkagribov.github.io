@@ -8,7 +8,6 @@ body, html {
     display: flex;
     flex-direction: column;
     grid-template-columns: 1fr 2fr;
-    align-items: center; 
     gap: 20px;
     padding: 20px;
     
