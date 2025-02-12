@@ -7,7 +7,7 @@ body, html {
     display: flex;
     flex-direction: column;
     grid-template-columns: 1fr 2fr;
-    gap: 5px;
+    gap: 20px;
     padding: 20px;
     justify-content: center; 
     align-items: center;
@@ -17,7 +17,7 @@ body, html {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, auto);
-    gap: 5px;
+    gap: 1px;
     max-width: 500px;
     align-items: center;
     margin: 0 auto;
