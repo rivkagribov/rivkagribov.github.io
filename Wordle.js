@@ -43,7 +43,7 @@ function Checker() {
     for (let i = 0; i < maxLetters; i++) {
         let box = arrayCollection[startIdx + i];
         if (box.style.backgroundColor !== "green" && word.includes(answer[i]) && usedLetters[answer[i]] > 0) {
-            box.style.backgroundColor = "yellow";
+            box.style.backgroundColor = "light yellow";
             usedLetters[answer[i]]--;
         } else if (box.style.backgroundColor !== "green") {
             box.style.backgroundColor = "rgb(75,75,75)";
@@ -54,10 +54,14 @@ function Checker() {
 function updateDisplay() {
     let startIdx = (row - 1) * maxLetters;
     for (let i = 0; i < maxLetters; i++) {
-        arrayCollection[startIdx + i].textContent = currentGuess[i] || "";
+        let box = arrayCollection[startIdx + i];// Added
+        box.textContent = currentGuess[i] || "";// Added
+        box.classList.add('animated');// Added
+        setTimeout(() => {// Added
+            box.classList.remove('animated');// Added
+        }, 500); // Added
     }
 }
-
 async function resetGame() {
     gameOver = false;
     arrayCollection.forEach(box => {
