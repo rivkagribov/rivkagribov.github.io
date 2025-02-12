@@ -1,94 +1,106 @@
 let url = "https://random-word-api.vercel.app/api?words=1&length=5";
-let word = "", row = 1, answer = "";
+let word = "", row = 1, answer = "", gameOver = false;
 let collection = document.getElementsByClassName("box");
 let arrayCollection = Array.from(collection);
 let keyboardKeys = document.querySelectorAll(".key");
 let currentGuess = "";
-let maxLetters = 5; 
+let maxLetters = 5;
 
 async function WordGenerator() {
     try {
         let response = await fetch(url);
-        if (!response.ok) {
-            throw new Error("Failed to fetch word");
-        }
+        if (!response.ok) throw new Error("Failed to fetch word");
+
         const data = await response.json();
-        if (!data || !data[0]) {
-            throw new Error("Invalid word received");
-        }
-        word = data[0].toUpperCase(); 
+        if (!data || !data[0]) throw new Error("Invalid word received");
+
+        word = data[0].toUpperCase();
         console.log("Word generated:", word);
     } catch (error) {
         console.error("Error fetching word:", error);
         alert("There was an error fetching the word. Try again!");
     }
 }
-function Checker(){
-    let count=0;
-    let usedLetters={};
-    for(let i=0;i<word.length;i++){
-        usedLetters[word[i]]=0;
+
+function Checker() {
+    let usedLetters = {};
+    for (let letter of word) {
+        usedLetters[letter] = (usedLetters[letter] || 0) + 1;
     }
-    for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
-        if(answer.charAt(count)===word.charAt(count)){
-            arrayCollection[i].style.backgroundColor="green";
-            usedLetters[answer.charAt(count)]++;
+
+    let startIdx = (row - 1) * maxLetters;
+    
+    // First pass: Check exact matches (green)
+    for (let i = 0; i < maxLetters; i++) {
+        let box = arrayCollection[startIdx + i];
+        if (answer[i] === word[i]) {
+            box.style.backgroundColor = "green";
+            usedLetters[answer[i]]--;
         }
-        count++;
     }
-    count=0;
-    for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
-        if(arrayCollection[i].style.backgroundColor!=="green"){
-            if(word.includes(answer.charAt(count))&&usedLetters[answer.charAt(count)]<word.split(answer.charAt(count)).length-1){
-                arrayCollection[i].style.backgroundColor="yellow";usedLetters[answer.charAt(count)]++;
-            }
-            else{
-                arrayCollection[i].style.backgroundColor="rgb(75,75,75)";
-            }
+
+    // Second pass: Check misplaced letters (yellow)
+    for (let i = 0; i < maxLetters; i++) {
+        let box = arrayCollection[startIdx + i];
+        if (box.style.backgroundColor !== "green" && word.includes(answer[i]) && usedLetters[answer[i]] > 0) {
+            box.style.backgroundColor = "yellow";
+            usedLetters[answer[i]]--;
+        } else if (box.style.backgroundColor !== "green") {
+            box.style.backgroundColor = "rgb(75,75,75)";
         }
-        count++;
     }
 }
+
 function updateDisplay() {
-    let startIdx = (row - 1) * 5;
+    let startIdx = (row - 1) * maxLetters;
     for (let i = 0; i < maxLetters; i++) {
         arrayCollection[startIdx + i].textContent = currentGuess[i] || "";
     }
 }
 
-function resetGame() {
-    arrayCollection.forEach(box => {box.textContent = "";
-    box.style.backgroundColor = "rgb(0, 0, 0)";});
+async function resetGame() {
+    gameOver = false;
+    arrayCollection.forEach(box => {
+        box.textContent = "";
+        box.style.backgroundColor = "rgb(0, 0, 0)";
+    });
     word = "";
     row = 1;
     answer = "";
-    currentGuess = ""; 
+    currentGuess = "";
+    await WordGenerator();
 }
 
-async function Game() {
-    await WordGenerator();
-    while (row <= 6) {
-        if (currentGuess.length !== 5) {
-            alert("Please enter exactly 5 letters!");
-            continue;
-        }
-        answer = currentGuess; 
-        Checker();
-        if (word === answer) {
-            setTimeout(() => { alert("Congratulations, you did it handsome!"); }, 500);
-            break;
-        }
-        row++;
-        currentGuess = ""; // Reset for next round
-        updateDisplay();
+async function handleGuess() {
+    if (gameOver) return;
+    if (currentGuess.length !== maxLetters) {
+        alert("Word must be 5 letters!");
+        return;
     }
+
+    answer = currentGuess;
+    Checker();
+
+    if (word === answer) {
+        setTimeout(() => { alert("Congratulations, you did it handsome!"); }, 500);
+        gameOver = true;
+        return;
+    }
+
+    row++;
     if (row > 6) {
         alert("Looooseeeeer! The word was: " + word);
         resetGame();
+        return;
     }
+
+    currentGuess = "";
+    updateDisplay();
 }
 
 async function main() {
+    await WordGenerator();
+
     let resetButton = document.getElementById("resetButton");
     let settingsButton = document.getElementById('settingsButton');
     let heartButton = document.getElementById('heartButton');
@@ -100,10 +112,7 @@ async function main() {
     gameImage.style.width = "55px";  
     gameImage.style.height = "auto";  
 
-    resetButton.addEventListener('click', () => {
-        resetGame();
-        Game();
-    });
+    resetButton.addEventListener('click', resetGame);
 
     settingsButton.addEventListener('click', function() {
         alert('How To Play:\n1. Guess the Wordle in 5 tries.\n2. Each guess must be a valid 5-letter word.\n3. Tell Rivka "I love you" and give her a kiss. 💖');
@@ -112,45 +121,36 @@ async function main() {
     heartButton.addEventListener('click', function() {
         alert('More');
     });
+
     newButtons.forEach(button => {
         button.addEventListener('click', function() {
-            let letter = button.textContent;
-            if (currentGuess.length < maxLetters) {
-                currentGuess += letter;
-                updateDisplay();
-            }
+            if (gameOver || currentGuess.length >= maxLetters) return;
+            currentGuess += button.textContent;
+            updateDisplay();
         });
     });
+
     backspaceButton.addEventListener("click", function() {
+        if (gameOver) return;
         currentGuess = currentGuess.slice(0, -1);
         updateDisplay();
     });
-document.addEventListener("keydown", async function(event) {
-    if (event.key === "Enter") {
-        if (currentGuess.length === maxLetters) {
-            answer = currentGuess;
-            await InsertCharacter(answer, row);
-            Checker();
-            currentGuess = "";
+
+    enterButton.addEventListener("click", handleGuess);
+
+    document.addEventListener("keydown", function(event) {
+        if (gameOver) return;
+
+        if (/^[a-zA-Z]$/.test(event.key) && currentGuess.length < maxLetters) {
+            currentGuess += event.key.toUpperCase();
             updateDisplay();
-        } else {
-            alert("Word must be 5 letters!");
-        }
-    }
-    
-    // Handle enter key
-    enterButton.addEventListener("click", async function() {
-        if (currentGuess.length === maxLetters) {
-            answer = currentGuess;
-            await InsertCharacter(answer, row);
-            Checker();
-            currentGuess = "";
+        } else if (event.key === "Backspace") {
+            currentGuess = currentGuess.slice(0, -1);
             updateDisplay();
-        } else {
-            alert("Word must be 5 letters!");
+        } else if (event.key === "Enter") {
+            handleGuess();
         }
     });
-    await Game();
 }
 
 main();
