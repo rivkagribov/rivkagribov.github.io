@@ -10,6 +10,8 @@ body, html {
     gap: 20px;
     padding: 20px;
     justify-content: center; 
+    align-items: center;
+    margin-top: 20px;
 }
 .innerContainer {
     display: grid;
