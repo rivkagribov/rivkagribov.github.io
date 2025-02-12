@@ -1,14 +1,19 @@
 body, html {
     height: 100%;
     margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: linear-gradient(to right, rgb(50, 50, 50), rgb(105, 105, 105), rgb(50,50,50));
 }
 .container {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     grid-template-columns: 1fr 2fr;
+    align-items: center; 
     gap: 20px;
     padding: 20px;
-    justify-content: center;
+    
 }
 .innerContainer {
     display: grid;
