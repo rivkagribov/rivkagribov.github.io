@@ -23,7 +23,32 @@ async function WordGenerator() {
         alert("There was an error fetching the word. Try again!");
     }
 }
-
+function Checker(){
+    let count=0;
+    let usedLetters={};
+    for(let i=0;i<word.length;i++){
+        usedLetters[word[i]]=0;
+    }
+    for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
+        if(answer.charAt(count)===word.charAt(count)){
+            arrayCollection[i].style.backgroundColor="green";
+            usedLetters[answer.charAt(count)]++;
+        }
+        count++;
+    }
+    count=0;
+    for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
+        if(arrayCollection[i].style.backgroundColor!=="green"){
+            if(word.includes(answer.charAt(count))&&usedLetters[answer.charAt(count)]<word.split(answer.charAt(count)).length-1){
+                arrayCollection[i].style.backgroundColor="yellow";usedLetters[answer.charAt(count)]++;
+            }
+            else{
+                arrayCollection[i].style.backgroundColor="rgb(75,75,75)";
+            }
+        }
+        count++;
+    }
+}
 function updateDisplay() {
     let startIdx = (row - 1) * 5;
     for (let i = 0; i < maxLetters; i++) {
@@ -32,15 +57,12 @@ function updateDisplay() {
 }
 
 function resetGame() {
-    arrayCollection.forEach(box => {
-        box.textContent = "";
-        box.style.backgroundColor = "rgb(0, 0, 0)";
-    });
+    arrayCollection.forEach(box => {box.textContent = "";
+    box.style.backgroundColor = "rgb(0, 0, 0)";});
     word = "";
     row = 1;
     answer = "";
     currentGuess = ""; 
-    updateDisplay();  
 }
 
 async function Game() {
@@ -51,7 +73,6 @@ async function Game() {
             continue;
         }
         answer = currentGuess; 
-        await InsertCharacter(answer, row);
         Checker();
         if (word === answer) {
             setTimeout(() => { alert("Congratulations, you did it handsome!"); }, 500);
@@ -81,6 +102,7 @@ async function main() {
 
     resetButton.addEventListener('click', () => {
         resetGame();
+        Game();
     });
 
     settingsButton.addEventListener('click', function() {
@@ -90,8 +112,6 @@ async function main() {
     heartButton.addEventListener('click', function() {
         alert('More');
     });
-
-    // Keyboard input handling
     newButtons.forEach(button => {
         button.addEventListener('click', function() {
             let letter = button.textContent;
@@ -101,13 +121,10 @@ async function main() {
             }
         });
     });
-
-    // Handle backspace
     backspaceButton.addEventListener("click", function() {
         currentGuess = currentGuess.slice(0, -1);
         updateDisplay();
     });
-// Handle enter key press
 document.addEventListener("keydown", async function(event) {
     if (event.key === "Enter") {
         if (currentGuess.length === maxLetters) {
@@ -133,6 +150,7 @@ document.addEventListener("keydown", async function(event) {
             alert("Word must be 5 letters!");
         }
     });
+    await Game();
 }
 
 main();
