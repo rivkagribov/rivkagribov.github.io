@@ -1,10 +1,10 @@
-let url='https://random-word-api.vercel.app/api?words=1&length=5';
-let word="",row=1,answer="";
-let collection=document.getElementsByClassName("box");
-let arrayCollection=Array.from(collection);
+let url = "https://random-word-api.vercel.app/api?words=1&length=5";
+let word = "", row = 1, answer = "";
+let collection = document.getElementsByClassName("box");
+let arrayCollection = Array.from(collection);
 let keyboardKeys = document.querySelectorAll(".key");
-let currentGuess = "",
-let maxLEtters = 5;
+let currentGuess = "";
+let maxLetters = 5; // Fixed capitalization
 
 async function WordGenerator() {
     try {
@@ -24,157 +24,91 @@ async function WordGenerator() {
     }
 }
 
-function Checker(){
-    let count=0;
-    let usedLetters={};
-    
-    for(let i=0;i<word.length;i++){
-        usedLetters[word[i]]=0;
+function updateDisplay() {
+    let startIdx = (row - 1) * 5;
+    for (let i = 0; i < maxLetters; i++) {
+        arrayCollection[startIdx + i].textContent = currentGuess[i] || "";
     }
-    // First pass: Mark correct (green) letters
-    for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
-        if(answer.charAt(count)===word.charAt(count)){
-            arrayCollection[i].style.backgroundColor="green";
-            usedLetters[answer.charAt(count)]++;
-        }
-        count++;
-    }
-    count=0;
-    
-    // Second pass: Mark present (yellow) letters or incorrect(grey) letters 
-    for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
-        if(arrayCollection[i].style.backgroundColor!=="green"){
-             let letter = answer.charAt(count);
-            let occurrences = (word.match(new RegExp(letter, "g")) || []).length;
-
-            if(word.includes(letter)&&usedLetters[letter]<occurrences){
-                arrayCollection[i].style.backgroundColor="rgb(180, 180, 110)"; //yellow
-                usedLetters[letter]++;
-            }
-            else {
-                arrayCollection[i].style.backgroundColor="rgb(75,75,75)"; //grey
-            }
-        }
-        count++;
-    }
-    // Grey out used letters on the keyboard
-    greyOutUsedLetters();
 }
-// Function to Grey-Out Used Letters on the Keyboard
-function greyOutUsedLetters() {
-    let keyboardKeys = document.querySelectorAll(".key");
 
-    arrayCollection.forEach((box) => {
-        let letter = box.textContent.trim().toUpperCase(); ;
-        if (!letter) return; // Skip empty boxes
-
-        let keyButton = [...keyboardKeys].find((btn) => btn.textContent.trim().toUpperCase() === letter);
-        if (!keyButton) return;
-
-        if (box.style.backgroundColor === "green") {
-            keyButton.style.backgroundColor = "green";
-        } else if (box.style.backgroundColor === "rgb(180, 180, 110)") { //yellow
-            keyButton.style.backgroundColor = "rgb(180, 180, 110)"; //yellow
-        } else {
-            keyButton.style.backgroundColor = "rgb(75,75,75)"; //grey
-        }
+function resetGame() {
+    arrayCollection.forEach(box => {
+        box.textContent = "";
+        box.style.backgroundColor = "rgb(0, 0, 0)";
     });
-}
-async function InsertCharacter(answer,row){
-    let count=0;
-    for(let i=(row-1)*5;i<(row-1)*5+answer.length;i++){
-        await new Promise(resolve=>setTimeout(resolve,300*count));
-        arrayCollection[i].classList.add("flip");
-        setTimeout(((i,count)=>{
-            arrayCollection[i].textContent=answer.charAt(count);
-            arrayCollection[i].classList.remove("flip");
-        }).bind(null,i,count),150);
-        count++;
-    }
+    word = "";
+    row = 1;
+    answer = "";
+    currentGuess = ""; 
+    updateDisplay();  
 }
 
-function resetGame(){
-    arrayCollection.forEach(box=>{
-        box.textContent="";
-        box.style.backgroundColor="rgb(0, 0, 0)";}
-    );
-    word="";
-    row=1;
-    answer="";
-    currentGuess = "";  // Reset guess
-    updateDisplay();    // Ensure UI clears
-}
-
-async function Game(){
+async function Game() {
     await WordGenerator();
-    while(row<=6){
-        answer=prompt("Enter the word:").toUpperCase();
-        if(answer.length!==5){
+    while (row <= 6) {
+        if (currentGuess.length !== 5) {
             alert("Please enter exactly 5 letters!");
             continue;
         }
-        await InsertCharacter(answer,row);
+        answer = currentGuess; // Fix: Store the typed guess
+        await InsertCharacter(answer, row);
         Checker();
-        if(word===answer){
-            setTimeout(()=>{alert("Congratulations, you did it handsome!");},500);
+        if (word === answer) {
+            setTimeout(() => { alert("Congratulations, you did it handsome!"); }, 500);
             break;
         }
         row++;
-        await new Promise(resolve=>setTimeout(resolve,1000));
+        currentGuess = ""; // Reset for next round
+        updateDisplay();
     }
-    if(row>6){
-        alert("Loserrrr! The word was: "+word);
+    if (row > 6) {
+        alert("Loserrrr! The word was: " + word);
         resetGame();
     }
 }
 
-function updateDisplay() {
-    // Update the boxes in the grid to show current guess
-    let startIdx = (row - 1) * 5;
-    for (let i = 0; i < maxLetters; i++) {
-        arrayCollection[startIdx + i].textContent = currentGuess[i] || ""; // Fill or clear boxes
-    }
-}
-async function main(){
-    let startButton=document.getElementById("startButton");
-    let resetButton=document.getElementById("resetButton");
-    let settingsButton=document.getElementById('settingsButton');
-    let heartButton=document.getElementById('heartButton');
-    let newButtons=document.querySelectorAll('.key')  // ".forEach(button => {" added . Add the new button
+async function main() {
+    let startButton = document.getElementById("startButton");
+    let resetButton = document.getElementById("resetButton");
+    let settingsButton = document.getElementById('settingsButton');
+    let heartButton = document.getElementById('heartButton');
+    let newButtons = document.querySelectorAll('.key');
     let backspaceButton = document.getElementById("backspace");
     let enterButton = document.getElementById("enter");
-    
-    //resize the Image of Justin
+
+    // Resize game image
     let gameImage = document.getElementById("gameImage");
-    gameImage.style.width = "55px";  // Set the desired width
-    gameImage.style.height = "auto";  // Maintain aspect ratio
-    
-    startButton.addEventListener('click',async()=>{   
+    gameImage.style.width = "55px";  
+    gameImage.style.height = "auto";  
+
+    startButton.addEventListener('click', async () => {   
         await Game();
     });
-    
-    resetButton.addEventListener('click',()=>{
+
+    resetButton.addEventListener('click', () => {
         resetGame();
     });
-    
+
     settingsButton.addEventListener('click', function() {
-        alert('How To Play. \n1. Guess the Wordle in 5 tries. \n2. Each guess must be a valid 5-letter word. \nThe color of the tiles will change to show how close your guess was to the word. \n3. Tell Rivka "I love you" and give her a kiss. \nGood Luck!');
+        alert('How To Play:\n1. Guess the Wordle in 5 tries.\n2. Each guess must be a valid 5-letter word.\n3. Tell Rivka "I love you" and give her a kiss. 💖');
     });
-    
+
     heartButton.addEventListener('click', function() {
         alert('More');
-    });  
-    
+    });
+
+    // Keyboard input handling
     newButtons.forEach(button => {
         button.addEventListener('click', function() {
             let letter = button.textContent;
             if (currentGuess.length < maxLetters) {
                 currentGuess += letter;
-                updateDisplay(); // guess logic
+                updateDisplay();
             }
         });
     });
-// Handle backspace
+
+    // Handle backspace
     backspaceButton.addEventListener("click", function() {
         currentGuess = currentGuess.slice(0, -1);
         updateDisplay();
@@ -184,22 +118,14 @@ async function main(){
     enterButton.addEventListener("click", async function() {
         if (currentGuess.length === maxLetters) {
             answer = currentGuess;
-            currentGuess = ""; // Reset guess input
-            updateDisplay();
             await InsertCharacter(answer, row);
             Checker();
-            if (word === answer) {
-                setTimeout(() => {  alert("Congratulations, you did it handsome!");  }, 500);
-                return;
-            }
-            row++;
-            if (row > 6) {
-                alert("Loserrrr! The word was: " + word);
-                resetGame();
-            }
+            currentGuess = "";
+            updateDisplay();
         } else {
-            alert("Enter a full 5-letter word!");
+            alert("Word must be 5 letters!");
         }
     });
 }
+
 main();
