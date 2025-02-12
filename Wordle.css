@@ -14,7 +14,7 @@ body, html {
     margin-top: 20px;
 }
 .innerContainer {
-    display: flex;
+    display: grid;
     grid-template-columns: repeat(5, 1fr);
     grid-template-rows: repeat(6, auto);
     gap: 5px;
