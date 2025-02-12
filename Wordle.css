@@ -4,11 +4,10 @@ body, html {
     background: linear-gradient(to right, rgb(50, 50, 50), rgb(105, 105, 105), rgb(50,50,50));
 }
 .container {
-    display: grid;
-    grid-template-columns: 1fr 2fr;
-    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
-    justify-content: center;
 }
 .innerContainer {
     display: grid;
@@ -16,6 +15,7 @@ body, html {
     grid-template-rows: repeat(6, auto);
     gap: 5px;
     max-width: fit-content;
+    margin-bottom: 20px;
 }
 .box {
     width: 100px;
@@ -28,8 +28,8 @@ body, html {
     font-size: 20px;
     border-radius: 10px;
     font-weight: bold;
-    border: 3px solid white;
-    color: white;
+    border: 3px light grey;
+    color: light grey;
 }
 .box.animated {
     animation: flipAnimation 0.5s ease-in-out;
@@ -47,24 +47,6 @@ body, html {
     display: flex;
     align-items: center;
     justify-content:center;
-}
-.start{
-    margin-right:10px;
-    position: absolute;
-    top: 22px;
-    right:20px;
-}
-.start button{
-    color: white;
-    border: 0px;
-    font-size: 1.5rem;
-    background-color: black;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-}
-.start button:hover{
-    cursor: pointer;
-    opacity: 0.9;
 }
 h1 {
     margin: 0px;
@@ -183,7 +165,7 @@ h1 {
         height: 40px;
         border: 2px solid white;
     }
-    #startButton,#resetButton{
+    #resetButton{
         font-size: 1rem;
     }
 }
@@ -200,7 +182,7 @@ h1 {
     .box {
         width: 30px;
         height: 30px;
-        border: 1px solid white;
+        border: 1px light grey;
         border-radius: 5px;
     }
     .scorecard h1{
@@ -215,12 +197,6 @@ h1 {
         top: 5px;
         right: -10px;
         margin-right: 2px;
-    }
-    #startButton{
-        font-size: 0.8rem;
-        position: absolute;
-        top: 5px;
-        right: 35px;
     }
     .navbar img{
         width: 28px;
