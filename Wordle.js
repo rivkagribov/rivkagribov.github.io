@@ -44,8 +44,12 @@ function Checker() {
 function updateDisplay() {
     let startIdx = (row - 1) * maxLetters;
     for (let i = 0; i < maxLetters; i++) {
-        let box = arrayCollection[startIdx + i];
-        box.textContent = currentGuess[i] || "";
+        let box = arrayCollection[startIdx + i];// Added
+        box.textContent = currentGuess[i] || "";// Added
+        box.classList.add('animated');// Added
+        setTimeout(() => {// Added
+            box.classList.remove('animated');// Added
+        }, 500); // Added
     }
 }
 async function resetGame() {
@@ -69,33 +73,7 @@ async function handleGuess() {
     }
 
     answer = currentGuess;
-    updateDisplay();
     Checker();
-
-
-    for (let i = 0; i < maxLetters; i++) {
-        setTimeout(() => {
-            let box = arrayCollection[(row - 1) * maxLetters + i];
-            box.classList.add('animated');
-            setTimeout(() => {
-                box.classList.remove('animated');
-                Checker();
-                if (word === answer) {
-                    setTimeout(() => { alert("Congratulations, you did it!"); }, 500);
-                    gameOver = true;
-                    return;
-                }
-                row++;
-                if (row > 6) {
-                    alert("You lose! The word was: " + word);
-                    resetGame();
-                    return;
-                }
-                currentGuess = "";
-                updateDisplay();
-            }, 1000); // Duration of the animation
-        }, i * 500); // Delay each flip
-    }
 
     if (word === answer) {
         setTimeout(() => { alert("Congratulations, you did it handsome!"); }, 500);
@@ -112,7 +90,6 @@ async function handleGuess() {
 
     currentGuess = "";
     updateDisplay();
-    }, 1000); 
 }
 
 async function main() {
