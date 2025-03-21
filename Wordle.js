@@ -44,12 +44,8 @@ function Checker() {
 function updateDisplay() {
     let startIdx = (row - 1) * maxLetters;
     for (let i = 0; i < maxLetters; i++) {
-        let box = arrayCollection[startIdx + i];// Added
-        box.textContent = currentGuess[i] || "";// Added
-        box.classList.add('animated');// Added
-        setTimeout(() => {// Added
-            box.classList.remove('animated');// Added
-        }, 500); // Added
+        let box = arrayCollection[startIdx + i];
+        box.textContent = currentGuess[i] || "";
     }
 }
 async function resetGame() {
@@ -74,6 +70,15 @@ async function handleGuess() {
 
     answer = currentGuess;
     Checker();
+
+    let startIdx = (row - 1) * maxLetters; //added
+    for (let i = 0; i < maxLetters; i++) {
+        let box = arrayCollection[startIdx + i];
+        box.classList.add('animated');
+        setTimeout(() => {
+            box.classList.remove('animated');
+        }, 500);
+    }
 
     if (word === answer) {
         setTimeout(() => { alert("Congratulations, you did it handsome!"); }, 500);
