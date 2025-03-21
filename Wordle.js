@@ -33,7 +33,7 @@ function Checker() {
     for (let i = 0; i < maxLetters; i++) {
         let box = arrayCollection[startIdx + i];
         if (box.style.backgroundColor !== "green" && word.includes(answer[i]) && usedLetters[answer[i]] > 0) {
-            box.style.backgroundColor = "rgb(240,230,140)";
+            box.style.backgroundColor = "rgb(225,215,120)";
             usedLetters[answer[i]]--;
         } else if (box.style.backgroundColor !== "green") {
             box.style.backgroundColor = "rgb(75,75,75)";
